@@ -40,13 +40,10 @@ class _RecipePageViewState extends State<RecipePageView> {
             controller: pageController,
             itemCount: recipes.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: RecipeCard(
-                  active: true,
-                  index: index,
-                  recipe: recipes[index],
-                ),
+              return RecipeCard(
+                active: index == currentPage,
+                index: index,
+                recipe: recipes[index],
               );
             },
           ),

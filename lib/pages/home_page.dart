@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_recipes/components/page_view.dart';
+import 'package:new_recipes/components/recipe_list.dart';
+import 'package:new_recipes/models/recipe_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -39,6 +41,10 @@ class HomePage extends StatelessWidget {
             height: 16.53,
           ),
           RecipePageView(),
+          const SizedBox(
+            height: 16.53,
+          ),
+          RecipeList(recipes: recipes),
         ],
       )),
     );

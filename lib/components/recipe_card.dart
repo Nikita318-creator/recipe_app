@@ -14,9 +14,16 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final blur = active! ? 16.0 : 0.0;
     final offset = active! ? 4.0 : 0.0;
-    // final top = active! ? 0.0 : 46.0;
+    final top = active! ? 0.0 : 46.0;
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      margin: EdgeInsets.only(
+        top: top,
+        bottom: 0,
+        right: 15.5,
+        left: active! ? 32.5 : 0,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
         color: recipe!.startColor,
