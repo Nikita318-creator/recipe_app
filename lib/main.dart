@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:new_recipes/MainHome/MainHome.dart';
+import "../MainHome/MainHome.dart";
+import 'package:name/theme/app_theme.dart';
+import 'package:name/theme/adaptive_theme.dart';
 
 void main() {
   runApp(const App());
@@ -10,15 +12,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'SFProText',
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: Colors.orange,
-        ),
+    return AdaptiveTheme(
+      builder: (context, theme) => MaterialApp(
+        color: AppTheme.of(context).colorScheme.background.primary,
+        home: const MainHome(),
+        theme: theme.materialTheme,
       ),
-      home: const MainHome(),
     );
   }
 }
