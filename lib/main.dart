@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new_recipes/pages/login_page.dart';
 import 'package:new_recipes/MainHome/MainHome.dart';
 
 void main() {
@@ -22,18 +21,4 @@ class App extends StatelessWidget {
       home: const MainHome(),
     );
   }
-
-  //   @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     theme: ThemeData(
-  //       fontFamily: 'SFProText',
-  //       colorScheme: ColorScheme.fromSwatch().copyWith(
-  //         secondary: Colors.orange,
-  //       ),
-  //     ),
-  //     home: const LoginPage(),
-  //   );
-  // }
 }
