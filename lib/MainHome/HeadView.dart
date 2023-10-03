@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_recipes/MainHome/HeadRow.dart';
 import 'package:new_recipes/MainHome/SubHeadRow.dart';
+import 'package:new_recipes/MainHome/ListView_1.dart';
 
 class HeadView extends StatelessWidget {
   const HeadView({super.key});
@@ -8,10 +9,17 @@ class HeadView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Color(0xff2e3650), // общий цвет
+      color: Color(0xff2e3650), // общий цвет
       child: Column(
         children: [
-          HeadRow(),
+          Container(
+            color: Colors.grey,
+            child: SizedBox(
+              height: 1,
+              width: MediaQuery.sizeOf(context).width - 50,
+            ),
+          ),
+          const HeadRow(),
           Container(
             color: Colors.grey,
             child: SizedBox(
@@ -20,6 +28,7 @@ class HeadView extends StatelessWidget {
             ),
           ),
           SubHeadRow(),
+          const ListView_1(), // тут может быть второй экран по ТоглБару
         ],
       ),
     );
