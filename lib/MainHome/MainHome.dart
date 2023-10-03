@@ -13,6 +13,7 @@ class MainHome extends StatelessWidget {
           // child:
           AppBar(
         title: Text('Рапидо'),
+        elevation: 0,
         centerTitle: true,
         backgroundColor: const Color(0xff2e3650),
         leading: Padding(
