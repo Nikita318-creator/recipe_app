@@ -15,8 +15,8 @@ class MainColorsData extends Equatable {
   final Color backgroundMain;
   final Color backgroundTop;
 
-  static const Color _backgroundMain = Color.fromARGB(255, 255, 255, 255);
-  static const Color _backgroundTop = Color.fromARGB(255, 255, 255, 255);
+  static const Color _backgroundMain = Color.fromARGB(255, 62, 67, 83);
+  static const Color _backgroundTop = Color(0xff2e3650);
 
   @override
   List<Object?> get props => [
