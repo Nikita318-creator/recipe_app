@@ -27,9 +27,14 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
+  bloc: ^8.1.0
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.1
+  meta: ^1.8.0
   name: 
     path: name
 
@@ -38,9 +43,23 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.7
 
+# dev_dependencies:
+#   # bloc_test: ^9.0.0
+#   flutter_test:
+#     sdk: flutter
+#   mocktail: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+# dependency_overrides:
+#   bloc:
+#     path: ../../packages/bloc
+  # bloc_test:
+  #   path: ../../packages/bloc_test
+  # flutter_bloc:
+  #   path: ../../packages/flutter_bloc
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
