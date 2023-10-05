@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_recipes/MainHome/HeadView.dart';
+import 'package:name/theme/app_theme.dart';
+// import 'package:name/theme/adaptive_theme.dart';
 
 class MainHome extends StatelessWidget {
   const MainHome({super.key});
@@ -15,7 +17,7 @@ class MainHome extends StatelessWidget {
         title: Text('Рапидо'),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: const Color(0xff2e3650),
+        backgroundColor: AppTheme.of(context).colorScheme.main.backgroundTop,
         leading: Padding(
           padding: const EdgeInsets.all(5), // TODO: - Кнопки меньше сделать
           child: SizedBox(
@@ -23,7 +25,7 @@ class MainHome extends StatelessWidget {
             child: TextButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 62, 67, 83)),
+                    AppTheme.of(context).colorScheme.main.backgroundMain),
               ),
               onPressed: () {},
               child: const Padding(

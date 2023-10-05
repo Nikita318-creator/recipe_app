@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:new_recipes/pages/home_page.dart';
+import 'package:name/theme/app_theme.dart';
 
 class HeadRow extends StatelessWidget {
   const HeadRow({super.key});
@@ -7,7 +8,7 @@ class HeadRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: const Color(0xff2e3650),
+        color: AppTheme.of(context).colorScheme.main.backgroundTop,
         child: const SizedBox(
           height: 80,
           child: Row(
