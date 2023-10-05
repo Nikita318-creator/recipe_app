@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import "../MainHome/MainHome.dart";
+import 'package:new_recipes/start_page.dart';
+import "../start_page.dart";
 import 'package:name/theme/app_theme.dart';
 import 'package:name/theme/adaptive_theme.dart';
 
@@ -15,7 +16,7 @@ class App extends StatelessWidget {
     return AdaptiveTheme(
       builder: (context, theme) => MaterialApp(
         color: AppTheme.of(context).colorScheme.background.primary,
-        home: const MainHome(),
+        home: const StartPage(),
         theme: theme.materialTheme,
       ),
     );

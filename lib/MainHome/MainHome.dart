@@ -27,7 +27,9 @@ class MainHome extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all(
                     AppTheme.of(context).colorScheme.main.backgroundMain),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: const Padding(
                 padding: EdgeInsets.only(left: 8, right: 8),
                 child: Icon(
