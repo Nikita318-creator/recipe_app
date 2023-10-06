@@ -88,11 +88,13 @@ class Actions extends StatelessWidget {
                 ],
               TimerRunInProgress() => [
                   FloatingActionButton(
+                    heroTag: "pause",
                     child: const Icon(Icons.pause),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerPaused()),
                   ),
                   FloatingActionButton(
+                    heroTag: "replay",
                     child: const Icon(Icons.replay),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerReset()),
@@ -100,11 +102,13 @@ class Actions extends StatelessWidget {
                 ],
               TimerRunPause() => [
                   FloatingActionButton(
+                    heroTag: "play_arrow",
                     child: const Icon(Icons.play_arrow),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerResumed()),
                   ),
                   FloatingActionButton(
+                    heroTag: "replay",
                     child: const Icon(Icons.replay),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerReset()),

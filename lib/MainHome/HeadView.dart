@@ -28,7 +28,7 @@ class HeadView extends StatelessWidget {
             ),
           ),
           SubHeadRow(),
-          const ListView_1(), // тут может быть второй экран по ТоглБару
+          ListView_1(), // тут может быть второй экран по ТоглБару
         ],
       ),
     );

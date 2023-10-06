@@ -7,25 +7,32 @@ part 'pizzas_state.dart';
 
 class PizzasBloc extends Bloc<PizzasEvent, PizzasState> {
   PizzasBloc() : super(PizzasInitial()) {
-    on<LoadPizzaCounter>((event, emit) async {
-      await Future<void>.delayed(const Duration(seconds: 2));
-      emit(const PizzasLoaded(pizzas: <PizzaModel>[]));
-    });
-    on<AddPizza>((event, emit) {
-      if (state is PizzasLoaded) {
-        final state = this.state as PizzasLoaded;
-        emit(
-          PizzasLoaded(pizzas: List.from(state.pizzas)..add(event.pizza)),
-        );
-      }
-    });
-    on<RemovePizza>((event, emit) {
-      if (state is PizzasLoaded) {
-        final state = this.state as PizzasLoaded;
-        emit(
-          PizzasLoaded(pizzas: List.from(state.pizzas)..remove(event.pizza)),
-        );
-      }
-    });
+    on<LoadPizzaCounter>(onLoadPizzaCounter);
+    on<AddPizza>(onAddPizza);
+    on<RemovePizza>(onRemovePizza);
+  }
+
+  void onLoadPizzaCounter(
+      LoadPizzaCounter event, Emitter<PizzasState> emit) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    emit(const PizzasLoaded(pizzas: <PizzaModel>[]));
+  }
+
+  void onAddPizza(AddPizza event, Emitter<PizzasState> emit) {
+    if (state is PizzasLoaded) {
+      final state = this.state as PizzasLoaded;
+      emit(
+        PizzasLoaded(pizzas: List.from(state.pizzas)..add(event.pizza)),
+      );
+    }
+  }
+
+  void onRemovePizza(RemovePizza event, Emitter<PizzasState> emit) async {
+    if (state is PizzasLoaded) {
+      final state = this.state as PizzasLoaded;
+      emit(
+        PizzasLoaded(pizzas: List.from(state.pizzas)..remove(event.pizza)),
+      );
+    }
   }
 }

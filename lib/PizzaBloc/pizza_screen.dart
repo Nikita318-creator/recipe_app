@@ -72,6 +72,7 @@ class PizzaScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+              heroTag: "add_pizza",
               child: const Icon(Icons.local_pizza),
               backgroundColor: Colors.blueAccent,
               onPressed: () {
@@ -83,6 +84,7 @@ class PizzaScreen extends StatelessWidget {
             height: 10,
           ),
           FloatingActionButton(
+              heroTag: "remove_pizza",
               child: const Icon(Icons.remove),
               backgroundColor: Colors.blueAccent,
               onPressed: () {
