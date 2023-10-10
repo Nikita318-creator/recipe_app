@@ -8,9 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
 
 class DigitField extends StatefulWidget {
-  DigitField({super.key});
+  DigitField(
+      {super.key,
+      required this.ticketID,
+      required this.cost,
+      required this.tappedDigits});
 
   List<bool> isActiveButtons = initiateIsActiveButtons();
+  List<int> tappedDigits = [];
+  String ticketID;
+  String cost;
 
   @override
   State<DigitField> createState() => DigitFieldState();
@@ -19,6 +26,10 @@ class DigitField extends StatefulWidget {
 class DigitFieldState extends State<DigitField> {
   @override
   Widget build(BuildContext context) {
+    if (widget.tappedDigits.isNotEmpty) {
+      widget.isActiveButtons =
+          initiateIsActiveButtonsOnStateExist(widget.tappedDigits);
+    }
     return SizedBox(
       width: MediaQuery.of(context).size.width - 80,
       child: Column(
@@ -57,16 +68,78 @@ class DigitFieldState extends State<DigitField> {
                               if (widget.isActiveButtons[tapped]) {
                                 context
                                     .read<DigitFieldBlockBloc>()
-                                    .add(AddDigit(tappedTicket: tapped));
+                                    .add(RemoveDigit(tappedDigit: tapped));
                               } else {
                                 context
                                     .read<DigitFieldBlockBloc>()
-                                    .add(RemoveDigit(tappedTicket: tapped));
+                                    .add(AddDigit(tappedDigit: tapped));
                               }
                               setState(() {
                                 widget.isActiveButtons[tapped] =
                                     !widget.isActiveButtons[tapped];
                               });
+                              if (widget.tappedDigits.length == 7) {
+                                showModalBottomSheet<void>(
+                                    context: context,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(20)),
+                                    ),
+                                    builder: (BuildContext context) {
+                                      return SizedBox(
+                                        height: 80,
+                                        child: Center(
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all<
+                                                        Color>(Colors.black87)),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  60,
+                                              height: 48,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                      'Оплатить ${widget.ticketID} билет'),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Container(
+                                                    color: AppTheme.of(context)
+                                                        .colorScheme
+                                                        .main
+                                                        .primaryTextColor,
+                                                    child: SizedBox(
+                                                      height: 20,
+                                                      width: 1,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Text(
+                                                    '${widget.cost} Р',
+                                                    style: TextStyle(
+                                                        color: Colors.amber),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              // HERE Logic to buy ticket
+                                              //
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    });
+                              }
                             },
                             child: Text(
                               '${(i * DigitFieldModel.columnCount) + (j + 1)}',
@@ -89,6 +162,16 @@ List<bool> initiateIsActiveButtons() {
 
   for (int i = 0; i < DigitFieldModel.rowCount; i++)
     for (int i = 0; i < DigitFieldModel.columnCount; i++) isActive.add(false);
+
+  return isActive;
+}
+
+List<bool> initiateIsActiveButtonsOnStateExist(List<int> tappedDigits) {
+  List<bool> isActive = initiateIsActiveButtons();
+
+  for (int tappedDigit in tappedDigits) {
+    isActive[tappedDigit] = true;
+  }
 
   return isActive;
 }

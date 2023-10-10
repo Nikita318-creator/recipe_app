@@ -21,11 +21,7 @@ class _ListView_1State extends State<ListView_1> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-              create: (context) =>
-                  DigitFieldBlockBloc()) //..add(LoadPizzaCounter())),
-        ],
+        providers: [BlocProvider(create: (context) => DigitFieldBlockBloc())],
         child: Expanded(
           child: ListView(
             scrollDirection: Axis.horizontal,

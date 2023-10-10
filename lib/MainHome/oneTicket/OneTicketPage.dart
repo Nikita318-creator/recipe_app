@@ -19,29 +19,36 @@ class OneTicketPage extends StatefulWidget {
 }
 
 class OneTicketPageState extends State<OneTicketPage> {
-  bool _isNumberChoosen = true;
+  bool _isNumberChosen = true;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DigitFieldBlockBloc, DigitFieldBlockState>(
         builder: (context, state) {
       if (state is DigitFieldBlockInitial) {
-        state.tappedTickets;
         return OneTicketView(
           ticket: widget.ticket,
-          isNumberChoosen: false,
+          isNumberChosen: false,
+          isMaxNumberChosen: false,
+          tappedDigits: state.tappedDigits,
         );
       }
       if (state is DigitFieldBlockMinCountTapped) {
-        state.tappedTickets;
         return OneTicketView(
           ticket: widget.ticket,
-          isNumberChoosen: true,
+          isNumberChosen: true,
+          isMaxNumberChosen: false,
+          tappedDigits: state.tappedDigits,
         );
       }
-      // if (state is DigitFieldBlockMaxCountTapped) {
-      // }
-      else {
+      if (state is DigitFieldBlockMaxCountTapped) {
+        return OneTicketView(
+          ticket: widget.ticket,
+          isNumberChosen: true,
+          isMaxNumberChosen: true,
+          tappedDigits: state.tappedDigits,
+        );
+      } else {
         return const Text('Something went wrong');
       }
     });

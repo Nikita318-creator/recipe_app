@@ -10,19 +10,19 @@ sealed class DigitFieldBlockEvent extends Equatable {
 final class OpenDigitField extends DigitFieldBlockEvent {}
 
 final class AddDigit extends DigitFieldBlockEvent {
-  final int tappedTicket;
+  final int tappedDigit;
 
-  const AddDigit({required this.tappedTicket});
+  const AddDigit({required this.tappedDigit});
 
   @override
-  List<Object> get props => [tappedTicket];
+  List<Object> get props => [tappedDigit];
 }
 
 final class RemoveDigit extends DigitFieldBlockEvent {
-  final int tappedTicket;
+  final int tappedDigit;
 
-  const RemoveDigit({required this.tappedTicket});
+  const RemoveDigit({required this.tappedDigit});
 
   @override
-  List<Object> get props => [tappedTicket];
+  List<Object> get props => [tappedDigit];
 }

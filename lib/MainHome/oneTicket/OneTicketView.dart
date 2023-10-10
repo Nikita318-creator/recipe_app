@@ -10,10 +10,16 @@ import 'package:name/theme/app_theme.dart';
 
 class OneTicketView extends StatefulWidget {
   OneTicketView(
-      {super.key, required this.ticket, required this.isNumberChoosen});
+      {super.key,
+      required this.ticket,
+      required this.isNumberChosen,
+      required this.isMaxNumberChosen,
+      required this.tappedDigits});
 
   OneTicketModel ticket;
-  bool isNumberChoosen;
+  bool isNumberChosen;
+  bool isMaxNumberChosen;
+  List<int> tappedDigits = [];
 
   @override
   State<OneTicketView> createState() => OneTicketViewState();
@@ -67,7 +73,7 @@ class OneTicketViewState extends State<OneTicketView> {
                     fontWeight: FontWeight.normal),
               ),
               SizedBox(width: 10),
-              widget.isNumberChoosen
+              widget.isNumberChosen
                   ? Icon(
                       Icons.check_outlined,
                       size: 12,
@@ -86,7 +92,9 @@ class OneTicketViewState extends State<OneTicketView> {
             children: [
               SizedBox(width: 15),
               Text(
-                'Выберите 8 чисел',
+                !widget.isMaxNumberChosen
+                    ? 'Выберите 8 чисел'
+                    : 'Выбрано максимум чисел',
                 style: TextStyle(
                     color:
                         AppTheme.of(context).colorScheme.main.primaryTextColor,
@@ -109,7 +117,11 @@ class OneTicketViewState extends State<OneTicketView> {
         SizedBox(
           height: 10,
         ),
-        DigitField(),
+        DigitField(
+          ticketID: widget.ticket.id,
+          cost: widget.ticket.cost,
+          tappedDigits: widget.tappedDigits,
+        ),
         SizedBox(
           height: 10,
         ),
