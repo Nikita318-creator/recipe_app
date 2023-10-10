@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new_recipes/start_page.dart';
 import "../start_page.dart";
 import 'package:name/theme/app_theme.dart';
 import 'package:name/theme/adaptive_theme.dart';

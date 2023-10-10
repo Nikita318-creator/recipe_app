@@ -17,21 +17,21 @@ class OneTicketModelsMoc {
       id: "1",
       cost: "2500",
     ),
-    // const OneTicketModel(
-    //   id: "2",
-    //   cost: "2500",
-    // ),
-    // const OneTicketModel(
-    //   id: "3",
-    //   cost: "2500",
-    // ),
-    // const OneTicketModel(
-    //   id: "4",
-    //   cost: "2500",
-    // ),
-    // const OneTicketModel(
-    //   id: "5",
-    //   cost: "2500",
-    // )
+    const OneTicketModel(
+      id: "2",
+      cost: "2500",
+    ),
+    const OneTicketModel(
+      id: "3",
+      cost: "2500",
+    ),
+    const OneTicketModel(
+      id: "4",
+      cost: "2500",
+    ),
+    const OneTicketModel(
+      id: "5",
+      cost: "2500",
+    )
   ];
 }

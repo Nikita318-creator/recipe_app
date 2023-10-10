@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:name/theme/app_theme.dart';
 import 'package:new_recipes/MainHome/oneTicket/DigitFieldModel.dart';
 
-class DigitField extends StatelessWidget {
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
+
+class DigitField extends StatefulWidget {
   DigitField({super.key});
 
+  List<bool> isActiveButtons = initiateIsActiveButtons();
+
+  @override
+  State<DigitField> createState() => DigitFieldState();
+}
+
+class DigitFieldState extends State<DigitField> {
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   for (int i = 0; i < DigitFieldModel.columnCount; i++)
-    //   for (int j = 0; j < DigitFieldModel.rowCount; j++)
-    //   child: ,
-    // );
-
     return SizedBox(
       width: MediaQuery.of(context).size.width - 80,
       child: Column(
@@ -26,32 +32,44 @@ class DigitField extends StatelessWidget {
                       ? SizedBox(
                           width: MediaQuery.of(context).size.width / 6 - 25,
                           child: TextButton(
-                            // style: TextButton.styleFrom(
-                            //     fixedSize: Size.fromWidth(
-                            //         MediaQuery.of(context).size.width / 6 - 17)),
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all<EdgeInsets>(
                                     EdgeInsets.all(5)),
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        AppTheme.of(context)
-                                            .colorScheme
-                                            .main
-                                            .primaryTextColor),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.black),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(14.0),
-                                        side: BorderSide(color: Colors.grey)))),
+                                    widget.isActiveButtons[(i * DigitFieldModel.columnCount) + (j + 1)]
+                                        ? MaterialStateProperty.all<Color>(
+                                            AppTheme.of(context)
+                                                .colorScheme
+                                                .main
+                                                .accentColor)
+                                        : MaterialStateProperty.all<Color>(
+                                            AppTheme.of(context)
+                                                .colorScheme
+                                                .main
+                                                .primaryTextColor),
+                                foregroundColor: MaterialStateProperty.all<Color>(
+                                    Colors.black),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0), side: BorderSide(color: Colors.grey)))),
                             onPressed: () {
-                              // логика тапа
+                              int tapped =
+                                  (i * DigitFieldModel.columnCount) + (j + 1);
+                              if (widget.isActiveButtons[tapped]) {
+                                context
+                                    .read<DigitFieldBlockBloc>()
+                                    .add(AddDigit(tappedTicket: tapped));
+                              } else {
+                                context
+                                    .read<DigitFieldBlockBloc>()
+                                    .add(RemoveDigit(tappedTicket: tapped));
+                              }
+                              setState(() {
+                                widget.isActiveButtons[tapped] =
+                                    !widget.isActiveButtons[tapped];
+                              });
                             },
                             child: Text(
                               '${(i * DigitFieldModel.columnCount) + (j + 1)}',
-                              // style: TextStyle(fontSize: 14)
                             ),
                           ),
                         )
@@ -64,4 +82,13 @@ class DigitField extends StatelessWidget {
       ),
     );
   }
+}
+
+List<bool> initiateIsActiveButtons() {
+  List<bool> isActive = [];
+
+  for (int i = 0; i < DigitFieldModel.rowCount; i++)
+    for (int i = 0; i < DigitFieldModel.columnCount; i++) isActive.add(false);
+
+  return isActive;
 }

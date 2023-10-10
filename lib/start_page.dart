@@ -5,6 +5,8 @@ import "../MainHome/MainHome.dart";
 import 'package:flutter/cupertino.dart';
 import 'package:new_recipes/timer/view/timer_page.dart';
 import 'package:new_recipes/PizzaBloc/pizza_page.dart';
+import 'package:new_recipes/MyCustomScrollView/MyCustomScrollView.dart';
+import 'package:new_recipes/MyPainter/MyPainter.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -42,6 +44,22 @@ class StartPage extends StatelessWidget {
             onPressed: () => Navigator.of(context).push(
                 CupertinoPageRoute(builder: (context) => const PizzaPage())),
             child: const Text('Open Pizza Page'),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () => Navigator.of(context).push(CupertinoPageRoute(
+                builder: (context) => const MyCustomScrollView())),
+            child: const Text('Open CustomScrollView Page'),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () => Navigator.of(context)
+                .push(CupertinoPageRoute(builder: (context) => MyPainter())),
+            child: const Text('Open MyPainter Page'),
           ),
         ]),
       ),
