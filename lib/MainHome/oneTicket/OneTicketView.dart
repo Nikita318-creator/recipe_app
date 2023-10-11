@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:new_recipes/MainHome/oneTicket/OneTicketModel.dart';
 import 'package:new_recipes/MainHome/oneTicket/DigitField.dart';
 import 'package:name/theme/app_theme.dart';
@@ -9,17 +8,17 @@ import 'package:name/theme/app_theme.dart';
 // import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
 
 class OneTicketView extends StatefulWidget {
-  OneTicketView(
+  const OneTicketView(
       {super.key,
       required this.ticket,
       required this.isNumberChosen,
       required this.isMaxNumberChosen,
       required this.tappedDigits});
 
-  OneTicketModel ticket;
-  bool isNumberChosen;
-  bool isMaxNumberChosen;
-  List<int> tappedDigits = [];
+  final OneTicketModel ticket;
+  final bool isNumberChosen;
+  final bool isMaxNumberChosen;
+  final List<int> tappedDigits;
 
   @override
   State<OneTicketView> createState() => OneTicketViewState();

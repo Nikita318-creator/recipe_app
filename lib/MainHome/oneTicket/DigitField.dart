@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:name/theme/app_theme.dart';
 import 'package:new_recipes/MainHome/oneTicket/DigitFieldModel.dart';
 
-import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
 
 class DigitField extends StatefulWidget {
@@ -15,9 +13,9 @@ class DigitField extends StatefulWidget {
       required this.tappedDigits});
 
   List<bool> isActiveButtons = initiateIsActiveButtons();
-  List<int> tappedDigits = [];
-  String ticketID;
-  String cost;
+  final List<int> tappedDigits;
+  final String ticketID;
+  final String cost;
 
   @override
   State<DigitField> createState() => DigitFieldState();

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_recipes/PizzaBloc/bloc/pizzas_bloc.dart';
-import 'package:new_recipes/PizzaBloc/pizza_screen.dart';
+import 'package:new_recipes/PizzaBloc/PizzaMainView.dart';
 import 'package:new_recipes/PizzaBloc/models/pizza_model.dart';
 
 class PizzaPage extends StatelessWidget {
@@ -17,7 +17,7 @@ class PizzaPage extends StatelessWidget {
         BlocProvider(
             create: (context) => PizzasBloc()..add(LoadPizzaCounter())),
       ],
-      child: const PizzaScreen(),
+      child: const PizzaMainView(),
     );
   }
 }

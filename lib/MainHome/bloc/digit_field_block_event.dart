@@ -9,6 +9,8 @@ sealed class DigitFieldBlockEvent extends Equatable {
 
 final class OpenDigitField extends DigitFieldBlockEvent {}
 
+final class OpenRandomTicket extends DigitFieldBlockEvent {}
+
 final class AddDigit extends DigitFieldBlockEvent {
   final int tappedDigit;
 

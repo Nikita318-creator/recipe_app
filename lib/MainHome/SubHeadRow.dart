@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
 // import 'package:new_recipes/pages/home_page.dart';
 
 class SubHeadRow extends StatefulWidget {
@@ -35,8 +37,17 @@ class _SubHeadRowState extends State<SubHeadRow> {
                         buttonIndex++) {
                       if (buttonIndex == index) {
                         isSelected[buttonIndex] = true;
+                        context
+                            .read<DigitFieldBlockBloc>()
+                            .add(OpenRandomTicket());
                       } else {
                         isSelected[buttonIndex] = false;
+                        context
+                            .read<DigitFieldBlockBloc>()
+                            .add(AddDigit(tappedDigit: 0));
+                        // context
+                        //     .read<DigitFieldBlockBloc>()
+                        //     .add(OpenDigitField());
                       }
                     }
                   },

@@ -31,3 +31,12 @@ final class DigitFieldBlockMaxCountTapped extends DigitFieldBlockState {
   @override
   List<Object> get props => [tappedDigits];
 }
+
+final class RandomTicketChosen extends DigitFieldBlockState {
+  final List<int> tappedDigits;
+
+  const RandomTicketChosen({required this.tappedDigits});
+
+  @override
+  List<Object> get props => [];
+}

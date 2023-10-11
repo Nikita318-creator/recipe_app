@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_recipes/PizzaBloc/bloc/pizzas_bloc.dart';
 import 'package:new_recipes/PizzaBloc/models/pizza_model.dart';
 
-class PizzaScreen extends StatelessWidget {
-  const PizzaScreen({super.key});
+class PizzaMainView extends StatelessWidget {
+  const PizzaMainView({super.key});
 
   @override
   Widget build(BuildContext context) {
