@@ -40,3 +40,5 @@ final class RandomTicketChosen extends DigitFieldBlockState {
   @override
   List<Object> get props => [];
 }
+
+final class DigitFieldBlockError extends DigitFieldBlockState {}

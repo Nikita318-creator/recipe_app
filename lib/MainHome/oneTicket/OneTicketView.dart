@@ -3,9 +3,9 @@ import 'package:new_recipes/MainHome/oneTicket/OneTicketModel.dart';
 import 'package:new_recipes/MainHome/oneTicket/DigitField.dart';
 import 'package:name/theme/app_theme.dart';
 
-// import 'package:bloc/bloc.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
 
 class OneTicketView extends StatefulWidget {
   const OneTicketView(
@@ -50,7 +50,9 @@ class OneTicketViewState extends State<OneTicketView> {
                   IconButton(
                     color:
                         AppTheme.of(context).colorScheme.main.primaryTextColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<DigitFieldBlockBloc>().add(OpenDigitField());
+                    },
                     icon: const Icon(Icons.close),
                   ),
                 ],

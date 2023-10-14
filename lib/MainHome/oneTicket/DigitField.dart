@@ -83,7 +83,7 @@ class DigitFieldState extends State<DigitField> {
                                       borderRadius: BorderRadius.vertical(
                                           top: Radius.circular(20)),
                                     ),
-                                    builder: (BuildContext context) {
+                                    builder: (BuildContext innerContext) {
                                       return SizedBox(
                                         height: 80,
                                         child: Center(
@@ -131,7 +131,10 @@ class DigitFieldState extends State<DigitField> {
                                             onPressed: () {
                                               // HERE Logic to buy ticket
                                               //
-                                              Navigator.pop(context);
+                                              context
+                                                  .read<DigitFieldBlockBloc>()
+                                                  .add(MakePayment());
+                                              Navigator.pop(innerContext);
                                             },
                                           ),
                                         ),

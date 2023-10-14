@@ -7,9 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
 
 class OneTicketPage extends StatefulWidget {
-  const OneTicketPage({super.key, required this.ticket});
+  const OneTicketPage({super.key, required this.ticket, required this.state});
 
   final OneTicketModel ticket;
+  final DigitFieldBlockState state;
 
   @override
   State<OneTicketPage> createState() => OneTicketPageState();
@@ -18,37 +19,37 @@ class OneTicketPage extends StatefulWidget {
 class OneTicketPageState extends State<OneTicketPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DigitFieldBlockBloc, DigitFieldBlockState>(
-        builder: (context, state) {
-      if (state is DigitFieldBlockInitial) {
-        return OneTicketView(
-          ticket: widget.ticket,
-          isNumberChosen: false,
-          isMaxNumberChosen: false,
-          tappedDigits: state.tappedDigits,
-        );
-      }
-      if (state is DigitFieldBlockMinCountTapped) {
-        return OneTicketView(
-          ticket: widget.ticket,
-          isNumberChosen: true,
-          isMaxNumberChosen: false,
-          tappedDigits: state.tappedDigits,
-        );
-      }
-      if (state is DigitFieldBlockMaxCountTapped) {
-        return OneTicketView(
-          ticket: widget.ticket,
-          isNumberChosen: true,
-          isMaxNumberChosen: true,
-          tappedDigits: state.tappedDigits,
-        );
-      }
-      if (state is RandomTicketChosen) {
-        return const RandomTicketView();
-      } else {
-        return const Text('Something went wrong');
-      }
-    });
+    if (widget.state is DigitFieldBlockInitial) {
+      var state = widget.state as DigitFieldBlockInitial;
+      return OneTicketView(
+        ticket: widget.ticket,
+        isNumberChosen: false,
+        isMaxNumberChosen: false,
+        tappedDigits: state.tappedDigits,
+      );
+    }
+    if (widget.state is DigitFieldBlockMinCountTapped) {
+      var state = widget.state as DigitFieldBlockMinCountTapped;
+      return OneTicketView(
+        ticket: widget.ticket,
+        isNumberChosen: true,
+        isMaxNumberChosen: false,
+        tappedDigits: state.tappedDigits,
+      );
+    }
+    if (widget.state is DigitFieldBlockMaxCountTapped) {
+      var state = widget.state as DigitFieldBlockMaxCountTapped;
+      return OneTicketView(
+        ticket: widget.ticket,
+        isNumberChosen: true,
+        isMaxNumberChosen: true,
+        tappedDigits: state.tappedDigits,
+      );
+    }
+    if (widget.state is RandomTicketChosen) {
+      return const RandomTicketView();
+    } else {
+      return const Text('Something went wrong');
+    }
   }
 }

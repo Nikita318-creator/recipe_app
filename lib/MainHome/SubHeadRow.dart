@@ -45,6 +45,9 @@ class _SubHeadRowState extends State<SubHeadRow> {
                         context
                             .read<DigitFieldBlockBloc>()
                             .add(AddDigit(tappedDigit: 0));
+                        context
+                            .read<DigitFieldBlockBloc>()
+                            .add(RemoveDigit(tappedDigit: 0));
                         // context
                         //     .read<DigitFieldBlockBloc>()
                         //     .add(OpenDigitField());

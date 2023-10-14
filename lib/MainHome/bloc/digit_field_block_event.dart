@@ -28,3 +28,5 @@ final class RemoveDigit extends DigitFieldBlockEvent {
   @override
   List<Object> get props => [tappedDigit];
 }
+
+final class MakePayment extends DigitFieldBlockEvent {}

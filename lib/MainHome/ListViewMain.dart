@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:new_recipes/MainHome/oneTicket/OneTicketPage.dart';
 import 'package:new_recipes/MainHome/oneTicket/OneTicketModel.dart';
+import 'package:new_recipes/MainHome/bloc/digit_field_block_bloc.dart';
 
 class ListViewMain extends StatefulWidget {
-  ListViewMain({super.key});
+  ListViewMain({super.key, required this.state});
 
   final tickets = OneTicketModelsMoc.tickets;
   // final PageController controller = PageController();
+  final DigitFieldBlockState state;
 
   @override
   State<ListViewMain> createState() => _ListViewMainState();
+
+  int countOfTickets() {
+    if (state is DigitFieldBlockMinCountTapped ||
+        state is DigitFieldBlockMaxCountTapped ||
+        state is DigitFieldBlockInitial) {
+      return OneTicketModelsMoc.tickets.length;
+    } else {
+      return 1;
+    }
+  }
 }
 
 class _ListViewMainState extends State<ListViewMain> {
@@ -17,12 +29,12 @@ class _ListViewMainState extends State<ListViewMain> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
-        scrollDirection: Axis.vertical,
+        scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         children: [
           Row(
             children: [
-              for (var ticket in OneTicketModelsMoc.tickets)
+              for (int index = 0; index < widget.countOfTickets(); index++)
                 Row(
                   children: [
                     SizedBox(width: 10),
@@ -36,7 +48,9 @@ class _ListViewMainState extends State<ListViewMain> {
                             ),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(20))),
-                        child: OneTicketPage(ticket: ticket),
+                        child: OneTicketPage(
+                            ticket: OneTicketModelsMoc.tickets[index],
+                            state: widget.state),
                       ),
                     ),
                   ],
