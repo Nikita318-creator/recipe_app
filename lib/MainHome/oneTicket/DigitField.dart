@@ -67,19 +67,23 @@ class DigitFieldState extends State<DigitField> {
                                 context
                                     .read<DigitFieldBlockBloc>()
                                     .add(RemoveDigit(tappedDigit: tapped));
+                                print(widget.tappedDigits);
                               } else {
                                 context
                                     .read<DigitFieldBlockBloc>()
                                     .add(AddDigit(tappedDigit: tapped));
+                                print(widget.tappedDigits);
                               }
                               setState(() {
                                 widget.isActiveButtons[tapped] =
                                     !widget.isActiveButtons[tapped];
                               });
-                              if (widget.tappedDigits.length == 7) {
+                              if (widget.tappedDigits.length == 7 &&
+                                  widget.isActiveButtons[tapped]) {
+                                print(widget.tappedDigits);
                                 showModalBottomSheet<void>(
                                     context: context,
-                                    shape: RoundedRectangleBorder(
+                                    shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.vertical(
                                           top: Radius.circular(20)),
                                     ),
@@ -129,8 +133,6 @@ class DigitFieldState extends State<DigitField> {
                                               ),
                                             ),
                                             onPressed: () {
-                                              // HERE Logic to buy ticket
-                                              //
                                               context
                                                   .read<DigitFieldBlockBloc>()
                                                   .add(MakePayment());

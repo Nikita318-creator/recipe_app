@@ -29,6 +29,10 @@ class DigitFieldBlockBloc
     } else if (state is DigitFieldBlockInitial) {
       emit(const RandomTicketChosen(tappedDigits: []));
     }
+    // else if (state is OpenRandomTicket) {
+    //   final state = this.state as RandomTicketChosen;
+    //   emit(RandomTicketChosen(tappedDigits: state.tappedDigits));
+    // }
   }
 
   void onOpenDigitField(

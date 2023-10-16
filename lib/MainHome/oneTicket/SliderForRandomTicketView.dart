@@ -39,7 +39,9 @@ class SliderForRandomTicketViewState extends State<SliderForRandomTicketView> {
                     ),
                     onPressed: () {
                       setState(() {
-                        widget.count--;
+                        if (widget.count > 1) {
+                          widget.count--;
+                        }
                       });
                     },
                     child: Icon(
@@ -62,7 +64,9 @@ class SliderForRandomTicketViewState extends State<SliderForRandomTicketView> {
                     ),
                     onPressed: () {
                       setState(() {
-                        widget.count++;
+                        if (widget.count < widget.maxPossibleValue) {
+                          widget.count++;
+                        }
                       });
                     },
                     child: Icon(

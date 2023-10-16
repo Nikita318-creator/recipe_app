@@ -8,7 +8,11 @@ sealed class DigitFieldBlockState extends Equatable {
 }
 
 final class DigitFieldBlockInitial extends DigitFieldBlockState {
+  //  var tappedDigitsOnAllTickets = List.generate(
+  //       OneTicketModelsMoc.tickets.length, (i) => List.filled(20, 0),
+  //       growable: false);
   final List<int> tappedDigits = [];
+  // final List<int> id;
 
   @override
   List<Object> get props => [tappedDigits];
