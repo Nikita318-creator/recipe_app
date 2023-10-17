@@ -73,7 +73,9 @@ class RandomTicketView extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                context.read<DigitFieldBlockBloc>().add(OpenRandomTicket());
+                context
+                    .read<DigitFieldBlockBloc>()
+                    .add(OpenRandomTicket(tappedDigit: 0, ticketId: 0));
                 // Navigator.pop(context);
               },
             ),

@@ -17,7 +17,8 @@ class ApiClient {
 
     // int randomNumber = Random().nextInt(statusCodesMoc.length);
     // return randomNumber;
-    return response.statusCode;
+    return 404;
+    // return response.statusCode;
   }
 
   Future<int> sendData() async {

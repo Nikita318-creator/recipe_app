@@ -22,12 +22,14 @@ class DigitFieldBlockBloc
       OpenRandomTicket event, Emitter<DigitFieldBlockState> emit) {
     if (state is DigitFieldBlockMinCountTapped) {
       final state = this.state as DigitFieldBlockMinCountTapped;
-      emit(RandomTicketChosen(tappedDigits: state.tappedDigits));
+      emit(RandomTicketChosen.map(
+          state.tappedDigits[event.ticketId] ?? [], event.ticketId));
     } else if (state is DigitFieldBlockMaxCountTapped) {
       final state = this.state as DigitFieldBlockMaxCountTapped;
-      emit(RandomTicketChosen(tappedDigits: state.tappedDigits));
+      emit(RandomTicketChosen.map(
+          state.tappedDigits[event.ticketId] ?? [], event.ticketId));
     } else if (state is DigitFieldBlockInitial) {
-      emit(const RandomTicketChosen(tappedDigits: []));
+      emit(RandomTicketChosen.map(const [], event.ticketId));
     }
     // else if (state is OpenRandomTicket) {
     //   final state = this.state as RandomTicketChosen;
@@ -43,10 +45,14 @@ class DigitFieldBlockBloc
         // emit(DigitFieldBlockInitial());
         break;
       case 404:
-        emit(DigitFieldBlockError());
+        emit(DigitFieldBlockError(
+            numberError: '404',
+            errorDescription:
+                'The requested resource could not be found but may be available in the future. Subsequent requests by the client are permissible'));
         break;
       default:
-        emit(DigitFieldBlockError());
+        emit(DigitFieldBlockError(
+            numberError: '', errorDescription: 'Unknown ERROR'));
         print('Unknown ERROR');
         break;
     }
@@ -78,41 +84,46 @@ class DigitFieldBlockBloc
       if (state.tappedDigits.isEmpty) {
         emit(DigitFieldBlockInitial());
       } else if (state.tappedDigits.length < 8) {
-        emit(
-          DigitFieldBlockMinCountTapped(
-              tappedDigits: List.from(state.tappedDigits)
-                ..add(event.tappedDigit)),
-        );
+        emit(DigitFieldBlockMinCountTapped.map(
+            List.from(state.tappedDigits[event.ticketId] ?? [])
+              ..add(event.tappedDigit),
+            event.ticketId));
         if (state.tappedDigits.length == 7) {
-          emit(DigitFieldBlockMaxCountTapped(
-              tappedDigits:
-                  List.from(state.tappedDigits + [event.tappedDigit])));
+          emit(DigitFieldBlockMaxCountTapped.map(
+              List.from(state.tappedDigits[event.ticketId] ??
+                  [] + [event.tappedDigit]),
+              event.ticketId));
         }
       } else {
         emit(
-          DigitFieldBlockMaxCountTapped(
-              tappedDigits: List.from(state.tappedDigits)),
+          DigitFieldBlockMaxCountTapped.map(
+              List.from(state.tappedDigits[event.ticketId] ?? []),
+              event.ticketId),
         );
       }
     } else if (state is DigitFieldBlockInitial) {
-      emit(DigitFieldBlockMinCountTapped(tappedDigits: [event.tappedDigit]));
+      emit(DigitFieldBlockMinCountTapped.map(
+          [event.tappedDigit], event.ticketId));
     } else if (state is DigitFieldBlockMinCountTapped) {
       final state = this.state as DigitFieldBlockMinCountTapped;
-      if (state.tappedDigits.length < 8) {
+      if ((state.tappedDigits[event.ticketId] ?? []).length < 8) {
         emit(
-          DigitFieldBlockMinCountTapped(
-              tappedDigits: List.from(state.tappedDigits)
-                ..add(event.tappedDigit)),
+          DigitFieldBlockMinCountTapped.map(
+              List.from(state.tappedDigits[event.ticketId] ?? [])
+                ..add(event.tappedDigit),
+              event.ticketId),
         );
         if (state.tappedDigits.length == 7) {
-          emit(DigitFieldBlockMaxCountTapped(
-              tappedDigits:
-                  List.from(state.tappedDigits + [event.tappedDigit])));
+          emit(DigitFieldBlockMaxCountTapped.map(
+              List.from(state.tappedDigits[event.ticketId] ??
+                  [] + [event.tappedDigit]),
+              event.ticketId));
         }
       } else {
         emit(
-          DigitFieldBlockMaxCountTapped(
-              tappedDigits: List.from(state.tappedDigits)),
+          DigitFieldBlockMaxCountTapped.map(
+              List.from(state.tappedDigits[event.ticketId] ?? []),
+              event.tappedDigit),
         );
       }
     }
@@ -125,17 +136,19 @@ class DigitFieldBlockBloc
         emit(DigitFieldBlockInitial());
       } else {
         emit(
-          DigitFieldBlockMinCountTapped(
-              tappedDigits: List.from(state.tappedDigits)
-                ..remove(event.tappedDigit)),
+          DigitFieldBlockMinCountTapped.map(
+              List.from(state.tappedDigits[event.ticketId] ?? [])
+                ..remove(event.tappedDigit),
+              event.ticketId),
         );
       }
     } else if (state is DigitFieldBlockMaxCountTapped) {
       final state = this.state as DigitFieldBlockMaxCountTapped;
       emit(
-        DigitFieldBlockMinCountTapped(
-            tappedDigits: List.from(state.tappedDigits)
-              ..remove(event.tappedDigit)),
+        DigitFieldBlockMinCountTapped.map(
+            List.from(state.tappedDigits[event.ticketId] ?? [])
+              ..remove(event.tappedDigit),
+            event.ticketId),
       );
     }
   }

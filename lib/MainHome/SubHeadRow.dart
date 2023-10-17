@@ -39,15 +39,15 @@ class _SubHeadRowState extends State<SubHeadRow> {
                         isSelected[buttonIndex] = true;
                         context
                             .read<DigitFieldBlockBloc>()
-                            .add(OpenRandomTicket());
+                            .add(OpenRandomTicket(tappedDigit: 1, ticketId: 0));
                       } else {
                         isSelected[buttonIndex] = false;
                         context
                             .read<DigitFieldBlockBloc>()
-                            .add(AddDigit(tappedDigit: 0));
+                            .add(AddDigit(tappedDigit: 0, ticketId: 0));
                         context
                             .read<DigitFieldBlockBloc>()
-                            .add(RemoveDigit(tappedDigit: 0));
+                            .add(RemoveDigit(tappedDigit: 0, ticketId: 0));
                         // context
                         //     .read<DigitFieldBlockBloc>()
                         //     .add(OpenDigitField());

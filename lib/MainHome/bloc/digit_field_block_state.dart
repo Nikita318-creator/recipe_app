@@ -8,41 +8,58 @@ sealed class DigitFieldBlockState extends Equatable {
 }
 
 final class DigitFieldBlockInitial extends DigitFieldBlockState {
-  //  var tappedDigitsOnAllTickets = List.generate(
-  //       OneTicketModelsMoc.tickets.length, (i) => List.filled(20, 0),
-  //       growable: false);
-  final List<int> tappedDigits = [];
-  // final List<int> id;
+  final Map<int, List<int>> tappedDigits = {};
 
   @override
   List<Object> get props => [tappedDigits];
 }
 
 final class DigitFieldBlockMinCountTapped extends DigitFieldBlockState {
-  final List<int> tappedDigits;
+  final Map<int, List<int>> tappedDigits;
 
   const DigitFieldBlockMinCountTapped({required this.tappedDigits});
+
+  factory DigitFieldBlockMinCountTapped.map(List<int> digits, int id) {
+    return DigitFieldBlockMinCountTapped(tappedDigits: {id: digits});
+  }
 
   @override
   List<Object> get props => [tappedDigits];
 }
 
 final class DigitFieldBlockMaxCountTapped extends DigitFieldBlockState {
-  final List<int> tappedDigits;
+  final Map<int, List<int>> tappedDigits;
 
   const DigitFieldBlockMaxCountTapped({required this.tappedDigits});
+
+  factory DigitFieldBlockMaxCountTapped.map(List<int> digits, int id) {
+    return DigitFieldBlockMaxCountTapped(tappedDigits: {id: digits});
+  }
 
   @override
   List<Object> get props => [tappedDigits];
 }
 
 final class RandomTicketChosen extends DigitFieldBlockState {
-  final List<int> tappedDigits;
+  final Map<int, List<int>> tappedDigits;
 
   const RandomTicketChosen({required this.tappedDigits});
 
+  factory RandomTicketChosen.map(List<int> digits, int id) {
+    return RandomTicketChosen(tappedDigits: {id: digits});
+  }
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [tappedDigits];
 }
 
-final class DigitFieldBlockError extends DigitFieldBlockState {}
+final class DigitFieldBlockError extends DigitFieldBlockState {
+  final String numberError;
+  final String errorDescription;
+
+  const DigitFieldBlockError(
+      {required this.numberError, required this.errorDescription});
+
+  @override
+  List<Object> get props => [numberError];
+}

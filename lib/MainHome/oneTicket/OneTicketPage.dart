@@ -25,7 +25,7 @@ class OneTicketPageState extends State<OneTicketPage> {
         ticket: widget.ticket,
         isNumberChosen: false,
         isMaxNumberChosen: false,
-        tappedDigits: state.tappedDigits,
+        tappedDigits: state.tappedDigits[int.parse(widget.ticket.id)] ?? [],
       );
     }
     if (widget.state is DigitFieldBlockMinCountTapped) {
@@ -34,7 +34,7 @@ class OneTicketPageState extends State<OneTicketPage> {
         ticket: widget.ticket,
         isNumberChosen: true,
         isMaxNumberChosen: false,
-        tappedDigits: state.tappedDigits,
+        tappedDigits: state.tappedDigits[int.parse(widget.ticket.id)] ?? [],
       );
     }
     if (widget.state is DigitFieldBlockMaxCountTapped) {
@@ -43,11 +43,43 @@ class OneTicketPageState extends State<OneTicketPage> {
         ticket: widget.ticket,
         isNumberChosen: true,
         isMaxNumberChosen: true,
-        tappedDigits: state.tappedDigits,
+        tappedDigits: state.tappedDigits[int.parse(widget.ticket.id)] ?? [],
       );
     }
     if (widget.state is RandomTicketChosen) {
       return const RandomTicketView();
+    }
+    if (widget.state is DigitFieldBlockError) {
+      var state = widget.state as DigitFieldBlockError;
+      return SizedBox(
+        width: MediaQuery.of(context).size.width - 25,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Text(state.numberError),
+                  content: Text(state.errorDescription),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              ),
+              child: const Text('reload'),
+            ),
+          ],
+        ),
+      );
     } else {
       return const Text('Something went wrong');
     }
