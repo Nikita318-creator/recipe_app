@@ -64,16 +64,14 @@ class DigitFieldState extends State<DigitField> {
                               int tapped =
                                   (i * DigitFieldModel.columnCount) + (j + 1);
                               if (widget.isActiveButtons[tapped]) {
-                                context.read<DigitFieldBlockBloc>().add(
-                                    RemoveDigit(
-                                        tappedDigit: tapped,
-                                        ticketId: int.parse(widget.ticketID)));
+                                context
+                                    .read<DigitFieldBlockBloc>()
+                                    .add(RemoveDigit(tappedDigit: tapped));
                                 print(widget.tappedDigits);
                               } else {
-                                context.read<DigitFieldBlockBloc>().add(
-                                    AddDigit(
-                                        tappedDigit: tapped,
-                                        ticketId: int.parse(widget.ticketID)));
+                                context
+                                    .read<DigitFieldBlockBloc>()
+                                    .add(AddDigit(tappedDigit: tapped));
                                 print(widget.tappedDigits);
                               }
                               setState(() {
