@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_recipes/features/main_home/presentetion/one_ticket/slider_for_random_ticket_view.dart';
 import 'package:name/theme/app_theme.dart';
-import 'package:new_recipes/features/main_home/bloc/digit_field_block_bloc.dart';
+import 'package:new_recipes/features/main_home/presentetion/bloc/digit_field_block_bloc.dart';
 
 class RandomTicketView extends StatelessWidget {
   const RandomTicketView({super.key});

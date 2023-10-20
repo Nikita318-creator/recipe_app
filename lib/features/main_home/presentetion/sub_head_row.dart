@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_recipes/features/main_home/bloc/digit_field_block_bloc.dart';
+import 'package:new_recipes/features/main_home/presentetion/bloc/digit_field_block_bloc.dart';
 // import 'package:new_recipes/pages/home_page.dart';
 
 class SubHeadRow extends StatefulWidget {

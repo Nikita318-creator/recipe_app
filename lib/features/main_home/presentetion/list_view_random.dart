@@ -1,30 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:new_recipes/features/main_home/bloc/digit_field_block_bloc.dart';
-import 'package:new_recipes/features/main_home/models/one_ticket_model.dart';
+import 'package:new_recipes/features/main_home/presentetion/bloc/digit_field_block_bloc.dart';
+import 'package:new_recipes/features/main_home/data/models/one_ticket_model.dart';
 import 'package:new_recipes/features/main_home/presentetion/one_ticket/one_ticket_page.dart';
 
-class ListViewRandom extends StatefulWidget {
-  ListViewRandom({required this.state, super.key});
+class ListViewRandom extends StatelessWidget {
+  ListViewRandom({super.key});
 
   final tickets = OneTicketModelsMoc.tickets;
-  // final PageController controller = PageController();
-  final DigitFieldBlockState state;
 
-  @override
-  State<ListViewRandom> createState() => _ListViewRandomState();
-
-  int countOfTickets() {
-    if (state is DigitFieldBlockMinCountTapped ||
-        state is DigitFieldBlockMaxCountTapped ||
-        state is DigitFieldBlockInitial) {
-      return OneTicketModelsMoc.tickets.length;
-    } else {
-      return 1;
-    }
-  }
-}
-
-class _ListViewRandomState extends State<ListViewRandom> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -33,27 +16,25 @@ class _ListViewRandomState extends State<ListViewRandom> {
         children: [
           Row(
             children: [
-              for (int index = 0; index < widget.countOfTickets(); index++)
-                Row(
-                  children: [
-                    const SizedBox(width: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.grey,
-                            ),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20))),
-                        child: OneTicketPage(
-                            ticket: OneTicketModelsMoc.tickets[index],
-                            state: widget.state),
-                      ),
+              Row(
+                children: [
+                  const SizedBox(width: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child:
+                          OneTicketPage(ticket: OneTicketModelsMoc.tickets[0]),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ],
           ),
           const SizedBox(width: 10),

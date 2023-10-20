@@ -4,7 +4,6 @@ part 'post.g.dart';
 
 @JsonSerializable()
 class Posts {
-
   Posts(
       {required this.userId,
       required this.id,

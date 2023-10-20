@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:name/theme/app_theme.dart';
-import 'package:new_recipes/features/main_home/bloc/digit_field_block_bloc.dart';
+import 'package:new_recipes/features/main_home/presentetion/bloc/digit_field_block_bloc.dart';
 import 'package:new_recipes/features/main_home/presentetion/one_ticket/digit_grid_view.dart';
-import 'package:new_recipes/features/main_home/models/one_ticket_model.dart';
+import 'package:new_recipes/features/main_home/data/models/one_ticket_model.dart';
 
-class OneTicketView extends StatefulWidget {
+class OneTicketView extends StatelessWidget {
   const OneTicketView(
       {required this.ticket,
       required this.isNumberChosen,
@@ -19,11 +19,6 @@ class OneTicketView extends StatefulWidget {
   final List<int> tappedDigits;
 
   @override
-  State<OneTicketView> createState() => OneTicketViewState();
-}
-
-class OneTicketViewState extends State<OneTicketView> {
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -33,7 +28,7 @@ class OneTicketViewState extends State<OneTicketView> {
             children: [
               const SizedBox(width: 15),
               Text(
-                'Билет ${widget.ticket.id}',
+                'Билет ${ticket.id}',
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
@@ -73,7 +68,7 @@ class OneTicketViewState extends State<OneTicketView> {
                     fontWeight: FontWeight.normal),
               ),
               const SizedBox(width: 10),
-              if (widget.isNumberChosen)
+              if (isNumberChosen)
                 Icon(
                   Icons.check_outlined,
                   size: 12,
@@ -93,7 +88,7 @@ class OneTicketViewState extends State<OneTicketView> {
             children: [
               const SizedBox(width: 15),
               Text(
-                !widget.isMaxNumberChosen
+                !isMaxNumberChosen
                     ? 'Выберите 8 чисел'
                     : 'Выбрано максимум чисел',
                 style: TextStyle(
@@ -119,9 +114,9 @@ class OneTicketViewState extends State<OneTicketView> {
           height: 10,
         ),
         DigitGridView(
-          ticketID: widget.ticket.id,
-          cost: widget.ticket.cost,
-          tappedDigits: widget.tappedDigits,
+          ticketID: ticket.id,
+          cost: ticket.cost,
+          tappedDigits: tappedDigits,
         ),
         const SizedBox(
           height: 10,

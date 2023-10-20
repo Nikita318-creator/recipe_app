@@ -58,9 +58,9 @@ dev_dependencies:
 
 # dependency_overrides:
 #   bloc:
-#     path: ../../packages/bloc
+#     path: ../../packages/presentetion/bloc
   # bloc_test:
-  #   path: ../../packages/bloc_test
+  #   path: ../../packages/presentetion/bloc_test
   # flutter_bloc:
   #   path: ../../packages/flutter_bloc
 

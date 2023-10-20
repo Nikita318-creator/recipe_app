@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:http/http.dart' as http;
 
-import 'package:new_recipes/features/main_home/domain/models/requests_data.dart';
+import 'package:new_recipes/features/main_home/data/models/requests_data.dart';
 
 // ignore: avoid_print_all
 class ApiClient {

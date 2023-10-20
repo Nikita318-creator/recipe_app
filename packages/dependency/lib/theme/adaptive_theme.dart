@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:name/name.dart';
+import 'package:name/ui_kit.dart';
 
 typedef AdaptiveThemeBuilder = Widget Function(
   BuildContext context,

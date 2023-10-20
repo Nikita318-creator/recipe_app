@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_recipes/features/main_home/bloc/digit_field_block_bloc.dart';
+import 'package:new_recipes/features/main_home/presentetion/bloc/digit_field_block_bloc.dart';
 import 'package:new_recipes/features/main_home/presentetion/head_row.dart';
 import 'package:new_recipes/features/main_home/presentetion/list_view_main.dart';
 import 'package:new_recipes/features/main_home/presentetion/list_view_random.dart';
@@ -83,10 +83,10 @@ class LotoView extends StatelessWidget {
                 const SizedBox(
                   height: 0,
                 ),
-              if (state is RandomTicketChosen)
-                ListViewRandom(state: state)
+              if (state is RandomTicketChosen || state is DigitFieldBlockError)
+                ListViewRandom()
               else
-                ListViewMain(state: state),
+                ListViewMain(),
             ],
           ),
         );

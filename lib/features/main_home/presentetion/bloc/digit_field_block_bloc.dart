@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:new_recipes/features/main_home/data/api_client.dart';
-import 'package:new_recipes/features/main_home/domain/error_data.dart';
-import 'package:new_recipes/features/main_home/domain/models/requests_data.dart';
+import 'package:new_recipes/features/main_home/data/models/error_data.dart';
+import 'package:new_recipes/features/main_home/data/models/requests_data.dart';
 
 part 'digit_field_block_event.dart';
 part 'digit_field_block_state.dart';
