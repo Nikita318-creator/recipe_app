@@ -4,6 +4,9 @@ class ErrorData {
   final String errorNumber;
 
   String getDescription() {
+    if (int.parse(errorNumber) < 300) {
+      return 'request successful, вы успешно приобрели билет(ы). Ожидайте уведомление о результате лотереии';
+    }
     switch (errorNumber) {
       case '400':
         return 'Bad Request, сервер обнаружил в запросе клиента синтаксическую ошибку';

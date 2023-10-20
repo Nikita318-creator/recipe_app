@@ -29,47 +29,36 @@ class DigitFieldBlockBloc
     } else if (state is DigitFieldBlockInitial) {
       emit(const RandomTicketChosen(tappedDigits: []));
     }
-    // else if (state is OpenRandomTicket) {
-    //   final state = this.state as RandomTicketChosen;
-    //   emit(RandomTicketChosen(tappedDigits: state.tappedDigits));
-    // }
   }
 
   Future<void> onOpenDigitField(
       OpenDigitField event, Emitter<DigitFieldBlockState> emit) async {
     final responseCode = await apiClient.getData();
 
-    switch (responseCode) {
-      case 200:
-        // emit(DigitFieldBlockInitial());
-        break;
-      case 404:
-        final ErrorData errorData = ErrorData(errorNumber: '404');
-        emit(DigitFieldBlockError(
-            errorNumber: errorData.errorNumber,
-            errorDescription: errorData.getDescription()));
-      default:
-        final ErrorData errorData = ErrorData(errorNumber: '404');
-        emit(DigitFieldBlockError(
-            errorNumber: errorData.errorNumber,
-            errorDescription: errorData.getDescription()));
-        break;
-    }
-  }
-
-  Future<void> onMakePayment(
-      MakePayment event, Emitter<DigitFieldBlockState> emit) async {
-    final responseCode = await apiClient.sendData();
-    print('responseCode: ${responseCode}');
-
     if (responseCode == 200) {
-      return;
+      if (apiClient.requestsData.isRandomTicketChosen) {
+        emit(const RandomTicketChosen(tappedDigits: []));
+      } else {
+        emit(DigitFieldBlockInitial());
+      }
     } else {
       final errorData = ErrorData(errorNumber: responseCode.toString());
       emit(DigitFieldBlockError(
           errorNumber: errorData.errorNumber,
           errorDescription: errorData.getDescription()));
     }
+  }
+
+  Future<void> onMakePayment(
+      MakePayment event, Emitter<DigitFieldBlockState> emit) async {
+    apiClient.requestsData.isRandomTicketChosen = state is RandomTicketChosen;
+
+    final responseCode = await apiClient.sendData();
+
+    final errorData = ErrorData(errorNumber: responseCode.toString());
+    emit(DigitFieldBlockError(
+        errorNumber: errorData.errorNumber,
+        errorDescription: errorData.getDescription()));
   }
 
   void onAddDigit(AddDigit event, Emitter<DigitFieldBlockState> emit) {
