@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:new_recipes/MainHome/LotoView.dart';
+// import 'package:new_recipes/features/main_home/LotoView.dart';
 import 'package:name/theme/app_theme.dart';
-import "../MainHome/MainHome.dart";
+import 'package:new_recipes/features/main_home/presentetion/main_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:new_recipes/timer/view/timer_page.dart';
-import 'package:new_recipes/PizzaBloc/pizza_page.dart';
-import 'package:new_recipes/MyCustomScrollView/MyCustomScrollView.dart';
-import 'package:new_recipes/MyPainter/MyPainter.dart';
+import 'package:new_recipes/pizza_bloc/pizza_page.dart';
+import 'package:new_recipes/my_custom_scroll_view/my_custom_scroll_view.dart';
+import 'package:new_recipes/painter/painter.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -15,7 +15,7 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose app'),
+        title: const Text('Choose app'),
         centerTitle: true,
         backgroundColor: AppTheme.of(context).colorScheme.main.backgroundTop,
       ),
@@ -57,8 +57,8 @@ class StartPage extends StatelessWidget {
             style: TextButton.styleFrom(
               textStyle: const TextStyle(fontSize: 20),
             ),
-            onPressed: () => Navigator.of(context)
-                .push(CupertinoPageRoute(builder: (context) => MyPainter())),
+            onPressed: () => Navigator.of(context).push(
+                CupertinoPageRoute(builder: (context) => const MyPainter())),
             child: const Text('Open MyPainter Page'),
           ),
         ]),

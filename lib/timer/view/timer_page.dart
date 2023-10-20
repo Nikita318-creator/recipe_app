@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_recipes/timer/ticker.dart';
-import 'package:new_recipes/timer//timer.dart';
+import 'package:new_recipes/timer/timer.dart';
 
 class TimerPage extends StatelessWidget {
   const TimerPage({super.key});
@@ -25,7 +24,7 @@ class TimerView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter Timer'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -55,7 +54,8 @@ class TimerText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final duration = context.select((TimerBloc bloc) => bloc.state.duration);
+    final duration = 0;
+    //context.select((bloc) => bloc.state.duration);
     final minutesStr =
         ((duration / 60) % 60).floor().toString().padLeft(2, '0');
     final secondsStr = (duration % 60).toString().padLeft(2, '0');
@@ -88,13 +88,13 @@ class Actions extends StatelessWidget {
                 ],
               TimerRunInProgress() => [
                   FloatingActionButton(
-                    heroTag: "pause",
+                    heroTag: 'pause',
                     child: const Icon(Icons.pause),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerPaused()),
                   ),
                   FloatingActionButton(
-                    heroTag: "replay",
+                    heroTag: 'replay',
                     child: const Icon(Icons.replay),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerReset()),
@@ -102,13 +102,13 @@ class Actions extends StatelessWidget {
                 ],
               TimerRunPause() => [
                   FloatingActionButton(
-                    heroTag: "play_arrow",
+                    heroTag: 'play_arrow',
                     child: const Icon(Icons.play_arrow),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerResumed()),
                   ),
                   FloatingActionButton(
-                    heroTag: "replay",
+                    heroTag: 'replay',
                     child: const Icon(Icons.replay),
                     onPressed: () =>
                         context.read<TimerBloc>().add(const TimerReset()),
