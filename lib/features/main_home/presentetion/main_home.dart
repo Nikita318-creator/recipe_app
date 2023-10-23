@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_recipes/features/main_home/presentetion/loto_view.dart';
 import 'package:name/theme/app_theme.dart';
+import 'package:new_recipes/features/main_home/presentetion/loto_view.dart';
 // import 'package:name/theme/adaptive_theme.dart';
 
 class MainHome extends StatelessWidget {

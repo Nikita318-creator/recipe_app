@@ -14,6 +14,8 @@ final class DigitFieldBlockInitial extends DigitFieldBlockState {
   List<Object> get props => [tappedDigits];
 }
 
+final class LoadingState extends DigitFieldBlockState {}
+
 final class DigitFieldBlockMinCountTapped extends DigitFieldBlockState {
   const DigitFieldBlockMinCountTapped({required this.tappedDigits});
   final List<int> tappedDigits;

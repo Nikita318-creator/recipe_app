@@ -28,119 +28,123 @@ class DigitGridViewState extends State<DigitGridView> {
       widget.isActiveButtons =
           initiateIsActiveButtonsOnStateExist(widget.tappedDigits);
     }
-    return SizedBox(
-      width: MediaQuery.of(context).size.width - 100,
-      height: MediaQuery.of(context).size.width - 200,
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 40,
-              mainAxisSpacing: 15,
-              crossAxisSpacing: 15,
-              childAspectRatio: 1.2,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    final tapped = index;
-                    if (widget.isActiveButtons[tapped]) {
-                      context
-                          .read<DigitFieldBlockBloc>()
-                          .add(RemoveDigit(tappedDigit: tapped));
-                    } else {
-                      context
-                          .read<DigitFieldBlockBloc>()
-                          .add(AddDigit(tappedDigit: tapped));
-                    }
-                    setState(() {
-                      widget.isActiveButtons[tapped] =
-                          !widget.isActiveButtons[tapped];
-                    });
-                    if (widget.tappedDigits.length == 7 &&
-                        widget.isActiveButtons[tapped]) {
-                      showModalBottomSheet<void>(
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(20)),
-                          ),
-                          builder: (innerContext) {
-                            return SizedBox(
-                              height: 80,
-                              child: Center(
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.black87)),
-                                  child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width - 60,
-                                    height: 48,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                            'Оплатить ${widget.ticketID} билет'),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Container(
-                                          color: AppTheme.of(context)
-                                              .colorScheme
-                                              .main
-                                              .primaryTextColor,
-                                          child: const SizedBox(
-                                            height: 20,
-                                            width: 1,
+    return Expanded(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width - 100,
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverGrid(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 40,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 15,
+                childAspectRatio: 1.2,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      final tapped = index;
+                      if (widget.isActiveButtons[tapped]) {
+                        context
+                            .read<DigitFieldBlockBloc>()
+                            .add(RemoveDigit(tappedDigit: tapped));
+                      } else {
+                        context
+                            .read<DigitFieldBlockBloc>()
+                            .add(AddDigit(tappedDigit: tapped));
+                      }
+                      setState(() {
+                        widget.isActiveButtons[tapped] =
+                            !widget.isActiveButtons[tapped];
+                      });
+                      if (widget.tappedDigits.length == 7 &&
+                          widget.isActiveButtons[tapped]) {
+                        showModalBottomSheet<void>(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20)),
+                            ),
+                            builder: (innerContext) {
+                              return SizedBox(
+                                height: 80,
+                                child: Center(
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.black87)),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          60,
+                                      height: 48,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                              'Оплатить ${widget.ticketID} билет'),
+                                          const SizedBox(
+                                            width: 20,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Text(
-                                          '${widget.cost} Р',
-                                          style: const TextStyle(
-                                              color: Colors.amber),
-                                        ),
-                                      ],
+                                          Container(
+                                            color: AppTheme.of(context)
+                                                .colorScheme
+                                                .main
+                                                .primaryTextColor,
+                                            child: const SizedBox(
+                                              height: 20,
+                                              width: 1,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text(
+                                            '${widget.cost} Р',
+                                            style: const TextStyle(
+                                                color: Colors.amber),
+                                          ),
+                                        ],
+                                      ),
                                     ),
+                                    onPressed: () {
+                                      context
+                                          .read<DigitFieldBlockBloc>()
+                                          .add(MakePayment());
+                                      Navigator.pop(innerContext);
+                                    },
                                   ),
-                                  onPressed: () {
-                                    context
-                                        .read<DigitFieldBlockBloc>()
-                                        .add(MakePayment());
-                                    Navigator.pop(innerContext);
-                                  },
                                 ),
-                              ),
-                            );
-                          });
-                    }
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: widget.isActiveButtons[index] //&&
-                            // int.parse(widget.ticketID) == 1
-                            ? AppTheme.of(context).colorScheme.main.accentColor
-                            : Colors.black12,
-                        borderRadius:
-                            BorderRadius.all(const Radius.circular(10))),
-                    child: Text(
-                      '${index + 1}',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                              );
+                            });
+                      }
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: widget.isActiveButtons[index] //&&
+                              // int.parse(widget.ticketID) == 1
+                              ? AppTheme.of(context)
+                                  .colorScheme
+                                  .main
+                                  .accentColor
+                              : Colors.black12,
+                          borderRadius:
+                              BorderRadius.all(const Radius.circular(10))),
+                      child: Text(
+                        '${index + 1}',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                );
-              },
-              childCount: 20,
+                  );
+                },
+                childCount: 20,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

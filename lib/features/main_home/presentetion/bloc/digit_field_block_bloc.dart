@@ -33,6 +33,10 @@ class DigitFieldBlockBloc
 
   Future<void> onOpenDigitField(
       OpenDigitField event, Emitter<DigitFieldBlockState> emit) async {
+    emit(LoadingState());
+
+    await Future<void>.delayed(const Duration(seconds: 1)); // WORK WITH REQUEST
+
     final responseCode = await apiClient.getData();
 
     if (responseCode == 200) {
@@ -52,6 +56,9 @@ class DigitFieldBlockBloc
   Future<void> onMakePayment(
       MakePayment event, Emitter<DigitFieldBlockState> emit) async {
     apiClient.requestsData.isRandomTicketChosen = state is RandomTicketChosen;
+    emit(LoadingState());
+
+    await Future<void>.delayed(const Duration(seconds: 2)); // WORK WITH REQUEST
 
     final responseCode = await apiClient.sendData();
 

@@ -12,7 +12,6 @@ final class OpenDigitField extends DigitFieldBlockEvent {}
 final class OpenRandomTicket extends DigitFieldBlockEvent {}
 
 final class AddDigit extends DigitFieldBlockEvent {
-
   const AddDigit({required this.tappedDigit});
   final int tappedDigit;
 
@@ -21,7 +20,6 @@ final class AddDigit extends DigitFieldBlockEvent {
 }
 
 final class RemoveDigit extends DigitFieldBlockEvent {
-
   const RemoveDigit({required this.tappedDigit});
   final int tappedDigit;
 

@@ -12,33 +12,34 @@ class ApiClient {
   final RequestsData requestsData;
 
   Future<int> getData() async {
-    final response = await http.get(Uri.parse(requestsData.getUrl));
+    return 200;
+    // final response = await http.get(Uri.parse(requestsData.getUrl));
 
     // MARK: ONLY for debug info:
-    if (response.statusCode == 200) {
-      print(response.body);
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
+    // if (response.statusCode == 200) {
+    //   print(response.body);
+    // } else {
+    //   print('Request failed with status: ${response.statusCode}.');
+    // }
 
     // final randomRequest = Random().nextInt(requestsData.statusCodesMoc.length);
     // return randomRequest;
-    return response.statusCode;
+    // return response.statusCode;
   }
 
   Future<int> sendData() async {
-    final response = await http.post(
-      Uri.parse(requestsData.postUrl),
-      body: jsonEncode(requestsData.payload),
-      headers: requestsData.headers,
-    );
+    // final response = await http.post(
+    //   Uri.parse(requestsData.postUrl),
+    //   body: jsonEncode(requestsData.payload),
+    //   headers: requestsData.headers,
+    // );
 
     // MARK: ONLY for debug info:
-    if (response.statusCode == 201) {
-      print('Data sent successfully.');
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
+    // if (response.statusCode == 201) {
+    //   print('Data sent successfully.');
+    // } else {
+    //   print('Request failed with status: ${response.statusCode}.');
+    // }
 
     // return response.statusCode;
     final randomRequest = requestsData
